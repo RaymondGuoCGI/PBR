@@ -228,7 +228,7 @@ h1 {
 
 .workspace {
   display: grid;
-  grid-template-columns: 360px minmax(300px, 0.72fr) minmax(520px, 1.1fr);
+  grid-template-columns: minmax(320px, 0.78fr) minmax(520px, 1.1fr) 360px;
   gap: 18px;
   align-items: start;
 }
@@ -270,6 +270,10 @@ h1 {
     linear-gradient(180deg, rgba(41, 88, 108, 0.34), rgba(14, 27, 38, 0.7));
   cursor: pointer;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.source-upload-zone {
+  margin-bottom: 14px;
 }
 
 .upload-zone:hover,

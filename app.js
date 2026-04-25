@@ -895,8 +895,8 @@ function applyLanguage() {
 
   document.querySelector(".controls-panel .panel-heading h2").textContent = lang.controlsTitle;
   document.querySelector(".controls-panel .panel-heading p").textContent = lang.controlsText;
-  document.querySelector(".upload-title").textContent = lang.uploadTitle;
-  document.querySelector(".upload-subtitle").textContent = lang.uploadText;
+  document.querySelector(".source-upload-zone .upload-title").textContent = lang.uploadTitle;
+  document.querySelector(".source-upload-zone .upload-subtitle").textContent = lang.uploadText;
   document.querySelectorAll(".field > span")[0].textContent = lang.resolution;
   document.querySelectorAll(".field > span")[1].textContent = lang.materialType;
   document.querySelectorAll(".field > span")[2].textContent = lang.normalStrength;

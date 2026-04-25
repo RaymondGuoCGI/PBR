@@ -76,13 +76,13 @@
       </header>
 
       <main class="workspace">
-        <section class="panel controls-panel">
+        <section class="panel source-panel">
           <div class="panel-heading">
-            <h2>生成设置</h2>
-            <p>上传图片后，浏览器会直接在本地生成贴图。</p>
+            <h2>源图预览</h2>
+            <p>可选择保留原图比例，或先做基础无缝处理后再生成通道。</p>
           </div>
 
-          <label class="upload-zone" for="file-input" id="upload-zone">
+          <label class="upload-zone source-upload-zone" for="file-input" id="upload-zone">
             <input id="file-input" type="file" accept="image/*" />
             <div class="upload-icon">
               <span></span>
@@ -93,68 +93,6 @@
               推荐使用正面、光照相对均匀、尽量无强透视的材质照片
             </span>
           </label>
-
-          <div class="control-grid">
-            <label class="field">
-              <span>输出分辨率</span>
-              <select id="resolution-select">
-                <option value="512">512 x 512</option>
-                <option value="1024" selected>1024 x 1024</option>
-                <option value="2048">2048 x 2048</option>
-                <option value="4096">4096 x 4096</option>
-              </select>
-            </label>
-
-            <label class="field">
-              <span>材质倾向</span>
-              <select id="material-select">
-                <option value="auto" selected>自动判断</option>
-                <option value="concrete">水泥 / 石材</option>
-                <option value="wood">木材</option>
-                <option value="fabric">布料 / 地毯</option>
-                <option value="plastic">塑料 / 橡胶</option>
-                <option value="metal">金属</option>
-              </select>
-            </label>
-
-            <label class="field">
-              <span>法线强度</span>
-              <input id="normal-strength" type="range" min="0.5" max="4" step="0.1" value="2" />
-              <strong id="normal-strength-value">2.0</strong>
-            </label>
-
-            <label class="field">
-              <span>高度细节</span>
-              <input id="detail-strength" type="range" min="0.5" max="3" step="0.1" value="1.5" />
-              <strong id="detail-strength-value">1.5</strong>
-            </label>
-          </div>
-
-          <div class="actions">
-            <button id="generate-btn" class="primary-btn" disabled>生成 PBR 贴图</button>
-          </div>
-
-          <div class="tip-list">
-            <div class="tip-item">
-              <strong>更适合</strong>
-              <span>平视、均匀光照、无明显透视变形的材质图</span>
-            </div>
-            <div class="tip-item">
-              <strong>结果预期</strong>
-              <span>适合概念验证和快速打样，不等同于高精度扫描</span>
-            </div>
-          </div>
-
-          <p class="note" id="status-text">
-            等待上传图片。
-          </p>
-        </section>
-
-        <section class="panel source-panel">
-          <div class="panel-heading">
-            <h2>源图预览</h2>
-            <p>可选择保留原图比例，或先做基础无缝处理后再生成通道。</p>
-          </div>
 
           <div class="source-preview">
             <div class="source-header">
@@ -273,6 +211,68 @@
 
             <button id="download-all-btn" class="primary-btn results-download-btn" disabled>下载 ZIP</button>
           </div>
+        </section>
+
+        <section class="panel controls-panel">
+          <div class="panel-heading">
+            <h2>生成设置</h2>
+            <p>上传图片后，浏览器会直接在本地生成贴图。</p>
+          </div>
+
+          <div class="control-grid">
+            <label class="field">
+              <span>输出分辨率</span>
+              <select id="resolution-select">
+                <option value="512">512 x 512</option>
+                <option value="1024" selected>1024 x 1024</option>
+                <option value="2048">2048 x 2048</option>
+                <option value="4096">4096 x 4096</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>材质倾向</span>
+              <select id="material-select">
+                <option value="auto" selected>自动判断</option>
+                <option value="concrete">水泥 / 石材</option>
+                <option value="wood">木材</option>
+                <option value="fabric">布料 / 地毯</option>
+                <option value="plastic">塑料 / 橡胶</option>
+                <option value="metal">金属</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>法线强度</span>
+              <input id="normal-strength" type="range" min="0.5" max="4" step="0.1" value="2" />
+              <strong id="normal-strength-value">2.0</strong>
+            </label>
+
+            <label class="field">
+              <span>高度细节</span>
+              <input id="detail-strength" type="range" min="0.5" max="3" step="0.1" value="1.5" />
+              <strong id="detail-strength-value">1.5</strong>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button id="generate-btn" class="primary-btn" disabled>生成 PBR 贴图</button>
+          </div>
+
+          <div class="tip-list">
+            <div class="tip-item">
+              <strong>更适合</strong>
+              <span>平视、均匀光照、无明显透视变形的材质图</span>
+            </div>
+            <div class="tip-item">
+              <strong>结果预期</strong>
+              <span>适合概念验证和快速打样，不等同于高精度扫描</span>
+            </div>
+          </div>
+
+          <p class="note" id="status-text">
+            等待上传图片。
+          </p>
         </section>
       </main>
 
