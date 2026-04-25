@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PBR 材质生成器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+    <div class="bg-grid"></div>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-bar">
+          <div class="hero-copy">
+            <p class="eyebrow">Single Image To PBR</p>
+            <h1>PBR 材质生成器</h1>
+            <p class="hero-text">上传一张参考图，快速生成常见 PBR 通道贴图。</p>
+          </div>
+
+          <div class="hero-tools">
+            <label class="hero-select">
+              <span>语言</span>
+              <select id="language-select">
+                <option value="zh" selected>中文</option>
+                <option value="en">English</option>
+              </select>
+            </label>
+
+            <label class="hero-select">
+              <span>主题</span>
+              <select id="theme-select">
+                <option value="dark" selected>深色</option>
+                <option value="light">浅色</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="hero-stats">
+            <div class="glass-card stat-card">
+              <span>输出</span>
+              <strong>6 通道</strong>
+            </div>
+            <div class="glass-card stat-card">
+              <span>处理</span>
+              <strong>本地生成</strong>
+            </div>
+            <div class="glass-card stat-card">
+              <span>尺寸</span>
+              <strong>512 - 4096</strong>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="panel controls-panel">
+          <div class="panel-heading">
+            <h2>生成设置</h2>
+            <p>上传图片后，浏览器会直接在本地生成贴图。</p>
+          </div>
+
+          <label class="upload-zone" for="file-input" id="upload-zone">
+            <input id="file-input" type="file" accept="image/*" />
+            <div class="upload-icon">
+              <span></span>
+              <span></span>
+            </div>
+            <span class="upload-title">拖拽图片到这里，或点击选择文件</span>
+            <span class="upload-subtitle">
+              推荐使用正面、光照相对均匀、尽量无强透视的材质照片
+            </span>
+          </label>
+
+          <div class="control-grid">
+            <label class="field">
+              <span>输出分辨率</span>
+              <select id="resolution-select">
+                <option value="512">512 x 512</option>
+                <option value="1024" selected>1024 x 1024</option>
+                <option value="2048">2048 x 2048</option>
+                <option value="4096">4096 x 4096</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>材质倾向</span>
+              <select id="material-select">
+                <option value="auto" selected>自动判断</option>
+                <option value="concrete">水泥 / 石材</option>
+                <option value="wood">木材</option>
+                <option value="fabric">布料 / 地毯</option>
+                <option value="plastic">塑料 / 橡胶</option>
+                <option value="metal">金属</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>法线强度</span>
+              <input id="normal-strength" type="range" min="0.5" max="4" step="0.1" value="2" />
+              <strong id="normal-strength-value">2.0</strong>
+            </label>
+
+            <label class="field">
+              <span>高度细节</span>
+              <input id="detail-strength" type="range" min="0.5" max="3" step="0.1" value="1.5" />
+              <strong id="detail-strength-value">1.5</strong>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button id="generate-btn" class="primary-btn" disabled>生成 PBR 贴图</button>
+          </div>
+
+          <div class="tip-list">
+            <div class="tip-item">
+              <strong>更适合</strong>
+              <span>平视、均匀光照、无明显透视变形的材质图</span>
+            </div>
+            <div class="tip-item">
+              <strong>结果预期</strong>
+              <span>适合概念验证和快速打样，不等同于高精度扫描</span>
+            </div>
+          </div>
+
+          <p class="note" id="status-text">
+            等待上传图片。
+          </p>
+        </section>
+
+        <section class="panel source-panel">
+          <div class="panel-heading">
+            <h2>源图预览</h2>
+            <p>可选择保留原图比例，或先做基础无缝处理后再生成通道。</p>
+          </div>
+
+          <div class="source-preview">
+            <div class="source-header">
+              <h3>输入纹理</h3>
+              <span id="source-meta">尚未加载</span>
+            </div>
+            <canvas id="source-canvas" width="1024" height="1024"></canvas>
+
+            <div class="source-options">
+              <label class="toggle-option">
+                <input id="preserve-aspect-toggle" type="checkbox" />
+                <span class="toggle-box"></span>
+                <span class="toggle-copy">
+                  <strong>保持原图尺寸</strong>
+                  <small>输出时保留原图宽高比，最长边按所选分辨率缩放。</small>
+                </span>
+              </label>
+
+              <label class="toggle-option">
+                <input id="seamless-toggle" type="checkbox" />
+                <span class="toggle-box"></span>
+                <span class="toggle-copy">
+                  <strong>无缝</strong>
+                  <small>对输入图做基础去接缝处理，减少平铺时边缘断层。</small>
+                </span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel results-panel">
+          <div class="panel-heading">
+            <h2>输出通道</h2>
+            <p id="results-meta">尚未生成结果。修改参数后需要重新生成。</p>
+          </div>
+
+          <div class="map-grid" id="map-grid">
+            <article class="map-card">
+              <div class="map-card-header">
+                <h3 data-map-title="albedo">Base Color</h3>
+                <button data-download="albedo" class="icon-download-btn" title="下载" aria-label="下载" disabled>
+                  <span class="download-icon" aria-hidden="true"></span>
+                </button>
+              </div>
+              <p class="map-desc">压掉原图明暗影响，保留更干净的表面颜色。</p>
+              <canvas id="albedo-canvas" width="1024" height="1024"></canvas>
+            </article>
+
+            <article class="map-card">
+              <div class="map-card-header">
+                <h3 data-map-title="height">Height</h3>
+                <button data-download="height" class="icon-download-btn" title="下载" aria-label="下载" disabled>
+                  <span class="download-icon" aria-hidden="true"></span>
+                </button>
+              </div>
+              <p class="map-desc">根据亮度与局部反差估算微表面起伏。</p>
+              <canvas id="height-canvas" width="1024" height="1024"></canvas>
+            </article>
+
+            <article class="map-card">
+              <div class="map-card-header">
+                <h3 data-map-title="normal">Normal</h3>
+                <button data-download="normal" class="icon-download-btn" title="下载" aria-label="下载" disabled>
+                  <span class="download-icon" aria-hidden="true"></span>
+                </button>
+              </div>
+              <p class="map-desc">从 Height 衍生出的切线空间法线贴图。</p>
+              <canvas id="normal-canvas" width="1024" height="1024"></canvas>
+            </article>
+
+            <article class="map-card">
+              <div class="map-card-header">
+                <h3 data-map-title="roughness">Roughness</h3>
+                <button data-download="roughness" class="icon-download-btn" title="下载" aria-label="下载" disabled>
+                  <span class="download-icon" aria-hidden="true"></span>
+                </button>
+              </div>
+              <p class="map-desc">根据材质类型与纹理细节估算粗糙度。</p>
+              <canvas id="roughness-canvas" width="1024" height="1024"></canvas>
+            </article>
+
+            <article class="map-card">
+              <div class="map-card-header">
+                <h3 data-map-title="ao">Ambient Occlusion</h3>
+                <button data-download="ao" class="icon-download-btn" title="下载" aria-label="下载" disabled>
+                  <span class="download-icon" aria-hidden="true"></span>
+                </button>
+              </div>
+              <p class="map-desc">增强凹陷、裂缝和接缝区域的遮蔽感。</p>
+              <canvas id="ao-canvas" width="1024" height="1024"></canvas>
+            </article>
+
+            <article class="map-card">
+              <div class="map-card-header">
+                <h3 data-map-title="metallic">Metallic</h3>
+                <button data-download="metallic" class="icon-download-btn" title="下载" aria-label="下载" disabled>
+                  <span class="download-icon" aria-hidden="true"></span>
+                </button>
+              </div>
+              <p class="map-desc">按材质倾向估算金属度，非金属通常接近 0。</p>
+              <canvas id="metallic-canvas" width="1024" height="1024"></canvas>
+            </article>
+          </div>
+
+          <div class="results-toolbar">
+            <label class="inline-field">
+              <span>导出目标</span>
+              <select id="export-profile-select">
+                <option value="generic" selected>通用 Metal/Rough</option>
+                <option value="blender">Blender</option>
+                <option value="unreal">Unreal Engine</option>
+                <option value="vray">V-Ray</option>
+                <option value="keyshot">KeyShot</option>
+              </select>
+            </label>
+
+            <button id="download-all-btn" class="primary-btn results-download-btn" disabled>下载 ZIP</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
