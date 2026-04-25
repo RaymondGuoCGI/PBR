@@ -342,19 +342,28 @@ input[type="range"] {
   accent-color: var(--accent-strong);
   -webkit-appearance: none;
   appearance: none;
-  background: transparent;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
-  height: 4px;
+  height: 6px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.34);
+  background: transparent;
 }
 
 input[type="range"]::-moz-range-track {
-  height: 4px;
+  height: 6px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.34);
+  background: transparent;
+}
+
+input[type="range"]::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: transparent;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -365,7 +374,8 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 50%;
   border: 0;
   background: var(--accent-strong);
-  margin-top: -6px;
+  box-shadow: 0 0 0 4px rgba(49, 217, 173, 0.14);
+  margin-top: -5px;
 }
 
 input[type="range"]::-moz-range-thumb {
@@ -374,6 +384,7 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 50%;
   border: 0;
   background: var(--accent-strong);
+  box-shadow: 0 0 0 4px rgba(49, 217, 173, 0.14);
 }
 
 .actions {
@@ -585,26 +596,34 @@ body[data-theme="light"] .source-stage.is-dragover {
 
 body[data-theme="light"] input[type="range"] {
   accent-color: #18cda0;
+  background: rgba(17, 35, 49, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(17, 35, 49, 0.06);
 }
 
 body[data-theme="light"] input[type="range"]::-webkit-slider-runnable-track {
-  height: 4px;
+  height: 6px;
   border-radius: 999px;
-  background: rgba(17, 35, 49, 0.18);
+  background: transparent;
 }
 
 body[data-theme="light"] input[type="range"]::-moz-range-track {
-  height: 4px;
+  height: 6px;
   border-radius: 999px;
-  background: rgba(17, 35, 49, 0.18);
+  background: transparent;
+}
+
+body[data-theme="light"] input[type="range"]::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: transparent;
 }
 
 body[data-theme="light"] input[type="range"]::-webkit-slider-thumb {
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 0 0 4px rgba(24, 205, 160, 0.16);
 }
 
 body[data-theme="light"] input[type="range"]::-moz-range-thumb {
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 0 0 4px rgba(24, 205, 160, 0.16);
 }
 
 body[data-theme="light"] .upload-icon {

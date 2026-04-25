@@ -303,14 +303,17 @@ bindExportProfile();
 applyExportProfile();
 bindThemeControl();
 bindLanguageControl();
+syncRangeVisuals();
 
 normalStrength.addEventListener("input", () => {
   normalStrengthValue.textContent = Number(normalStrength.value).toFixed(1);
+  updateRangeTrack(normalStrength);
   markOutputsStale(t().statuses.changedParam);
 });
 
 detailStrength.addEventListener("input", () => {
   detailStrengthValue.textContent = Number(detailStrength.value).toFixed(1);
+  updateRangeTrack(detailStrength);
   markOutputsStale(t().statuses.changedParam);
 });
 
@@ -873,6 +876,7 @@ function bindThemeControl() {
   document.body.dataset.theme = themeSelect.value;
   themeSelect.addEventListener("change", () => {
     document.body.dataset.theme = themeSelect.value;
+    syncRangeVisuals();
   });
 }
 
@@ -1018,6 +1022,36 @@ function getOutputDimensions(image, resolution, preserveAspect) {
     width: Math.max(1, Math.round((image.width / image.height) * resolution)),
     height: resolution,
   };
+}
+
+function getRangeColors() {
+  if (document.body.dataset.theme === "light") {
+    return {
+      fill: "#18cda0",
+      fillGlow: "rgba(24, 205, 160, 0.3)",
+      rest: "rgba(17, 35, 49, 0.18)",
+    };
+  }
+
+  return {
+    fill: "#31d9ad",
+    fillGlow: "rgba(49, 217, 173, 0.32)",
+    rest: "rgba(220, 236, 247, 0.22)",
+  };
+}
+
+function updateRangeTrack(input) {
+  const min = Number(input.min || 0);
+  const max = Number(input.max || 100);
+  const value = Number(input.value || min);
+  const progress = max === min ? 0 : ((value - min) / (max - min)) * 100;
+  const { fill, fillGlow, rest } = getRangeColors();
+
+  input.style.background = `linear-gradient(90deg, ${fill} 0%, ${fillGlow} ${Math.max(progress - 4, 0)}%, ${fill} ${progress}%, ${rest} ${progress}%, ${rest} 100%)`;
+}
+
+function syncRangeVisuals() {
+  [normalStrength, detailStrength].forEach(updateRangeTrack);
 }
 
 function makeSeamless(imageData) {
