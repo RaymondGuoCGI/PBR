@@ -306,13 +306,13 @@ bindLanguageControl();
 syncRangeVisuals();
 
 normalStrength.addEventListener("input", () => {
-  normalStrengthValue.textContent = Number(normalStrength.value).toFixed(1);
+  normalStrengthValue.textContent = formatSignedRangeValue(normalStrength.value);
   updateRangeTrack(normalStrength);
   markOutputsStale(t().statuses.changedParam);
 });
 
 detailStrength.addEventListener("input", () => {
-  detailStrengthValue.textContent = Number(detailStrength.value).toFixed(1);
+  detailStrengthValue.textContent = formatSignedRangeValue(detailStrength.value);
   updateRangeTrack(detailStrength);
   markOutputsStale(t().statuses.changedParam);
 });
@@ -373,8 +373,8 @@ generateBtn.addEventListener("click", async () => {
 
   const resolution = Number(resolutionSelect.value);
   const profile = materialSelect.value;
-  const normalScale = Number(normalStrength.value);
-  const detailScale = Number(detailStrength.value);
+  const normalScale = uiNormalStrengthToScale(Number(normalStrength.value));
+  const detailScale = uiDetailStrengthToScale(Number(detailStrength.value));
   const baseData = prepareSourceImageData(state.image, resolution, {
     preserveAspect: preserveAspectToggle.checked,
     seamless: seamlessToggle.checked,
@@ -1040,6 +1040,19 @@ function getRangeColors() {
   };
 }
 
+function formatSignedRangeValue(value) {
+  const number = Number(value).toFixed(1);
+  return Number(number) > 0 ? `+${number}` : number;
+}
+
+function uiNormalStrengthToScale(value) {
+  return clamp(1 + value, 0, 2);
+}
+
+function uiDetailStrengthToScale(value) {
+  return clamp(1 + value, 0, 2);
+}
+
 function updateRangeTrack(input) {
   const min = Number(input.min || 0);
   const max = Number(input.max || 100);
@@ -1052,6 +1065,8 @@ function updateRangeTrack(input) {
 
 function syncRangeVisuals() {
   [normalStrength, detailStrength].forEach(updateRangeTrack);
+  normalStrengthValue.textContent = formatSignedRangeValue(normalStrength.value);
+  detailStrengthValue.textContent = formatSignedRangeValue(detailStrength.value);
 }
 
 function makeSeamless(imageData) {
