@@ -459,11 +459,11 @@ button:disabled {
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
-    linear-gradient(45deg, rgba(255, 255, 255, 0.16) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(255, 255, 255, 0.16) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.17) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.17) 75%),
-    linear-gradient(180deg, rgba(19, 33, 45, 0.96), rgba(19, 33, 45, 0.96));
+    linear-gradient(45deg, rgba(255, 255, 255, 0.22) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.22) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.12) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.12) 75%),
+    linear-gradient(180deg, rgba(24, 40, 54, 0.96), rgba(24, 40, 54, 0.96));
   background-size: 22px 22px;
   background-position: 0 0, 0 11px, 11px -11px, -11px 0;
 }
