@@ -767,10 +767,26 @@ body[data-theme="light"] .icon-download-btn::after {
   margin-top: 16px;
 }
 
+.controls-toolbar {
+  justify-content: stretch;
+  align-items: stretch;
+  margin-top: 16px;
+}
+
 .inline-field {
   display: grid;
   gap: 6px;
   min-width: 190px;
+}
+
+.controls-toolbar .inline-field {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.controls-toolbar .results-download-btn {
+  min-width: 0;
+  width: 100%;
 }
 
 .inline-field span {

@@ -198,20 +198,6 @@
             </article>
           </div>
 
-          <div class="results-toolbar">
-            <label class="inline-field">
-              <span>导出目标</span>
-              <select id="export-profile-select">
-                <option value="generic" selected>通用 Metal/Rough</option>
-                <option value="blender">Blender</option>
-                <option value="unreal">Unreal Engine</option>
-                <option value="vray">V-Ray</option>
-                <option value="keyshot">KeyShot</option>
-              </select>
-            </label>
-
-            <button id="download-all-btn" class="primary-btn results-download-btn" disabled>下载 ZIP</button>
-          </div>
         </section>
 
         <section class="panel controls-panel">
@@ -260,15 +246,19 @@
             <button id="generate-btn" class="primary-btn" disabled>生成 PBR 贴图</button>
           </div>
 
-          <div class="tip-list">
-            <div class="tip-item">
-              <strong>更适合</strong>
-              <span>平视、均匀光照、无明显透视变形的材质图</span>
-            </div>
-            <div class="tip-item">
-              <strong>结果预期</strong>
-              <span>适合概念验证和快速打样，不等同于高精度扫描</span>
-            </div>
+          <div class="results-toolbar controls-toolbar">
+            <label class="inline-field">
+              <span>导出目标</span>
+              <select id="export-profile-select">
+                <option value="generic" selected>通用 Metal/Rough</option>
+                <option value="blender">Blender</option>
+                <option value="unreal">Unreal Engine</option>
+                <option value="vray">V-Ray</option>
+                <option value="keyshot">KeyShot</option>
+              </select>
+            </label>
+
+            <button id="download-all-btn" class="primary-btn results-download-btn" disabled>下载 ZIP</button>
           </div>
 
           <p class="note" id="status-text">

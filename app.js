@@ -903,10 +903,6 @@ function applyLanguage() {
   document.querySelectorAll(".field > span")[2].textContent = lang.normalStrength;
   document.querySelectorAll(".field > span")[3].textContent = lang.detailStrength;
   generateBtn.textContent = lang.generate;
-  document.querySelectorAll(".tip-item strong")[0].textContent = lang.tipGood;
-  document.querySelectorAll(".tip-item strong")[1].textContent = lang.tipResult;
-  document.querySelectorAll(".tip-item span")[0].textContent = lang.tipGoodText;
-  document.querySelectorAll(".tip-item span")[1].textContent = lang.tipResultText;
 
   document.querySelector(".source-panel .panel-heading h2").textContent = lang.sourceTitle;
   document.querySelector(".source-panel .panel-heading p").textContent = lang.sourceText;
