@@ -1014,7 +1014,12 @@ function applyLanguage() {
   document.querySelector(".footer-link-privacy").textContent = lang.footer.privacy;
   document.querySelector(".footer-link-terms").textContent = lang.footer.terms;
   document.querySelector(".footer-link-contact").textContent = lang.footer.contact;
-  feedbackTrigger.textContent = lang.feedback.trigger;
+  const feedbackTriggerText = feedbackTrigger.querySelector(".feedback-trigger-text");
+  if (feedbackTriggerText) {
+    feedbackTriggerText.textContent = lang.feedback.trigger;
+  }
+  feedbackTrigger.setAttribute("aria-label", lang.feedback.trigger);
+  feedbackTrigger.setAttribute("title", lang.feedback.trigger);
   document.getElementById("feedback-title").textContent = lang.feedback.title;
   document.getElementById("feedback-subtitle").textContent = lang.feedback.subtitle;
   document.getElementById("feedback-type-label").textContent = lang.feedback.typeLabel;

@@ -264,7 +264,10 @@
       </footer>
     </div>
 
-    <button id="feedback-trigger" class="feedback-trigger" type="button">反馈</button>
+    <button id="feedback-trigger" class="feedback-trigger" type="button" aria-label="反馈" title="反馈">
+      <span class="feedback-trigger-icon" aria-hidden="true"></span>
+      <span class="feedback-trigger-text">反馈</span>
+    </button>
 
     <div id="feedback-modal" class="feedback-modal" hidden>
       <div id="feedback-backdrop" class="feedback-backdrop"></div>
