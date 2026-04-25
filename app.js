@@ -147,6 +147,7 @@ const I18N = {
       title: "PBR 材质生成器",
       text: "单张图片生成 PBR 通道的在线工具。适合概念验证、快速 lookdev 和常见渲染器贴图整理。",
       about: "关于",
+      faq: "常见问题",
       privacy: "隐私政策",
       terms: "使用条款",
       contact: "联系",
@@ -248,6 +249,7 @@ const I18N = {
       title: "PBR Material Generator",
       text: "A browser-based tool for generating PBR channels from a single image. Suitable for concept validation, quick lookdev, and renderer-ready texture prep.",
       about: "About",
+      faq: "FAQ",
       privacy: "Privacy",
       terms: "Terms",
       contact: "Contact",
@@ -1011,6 +1013,7 @@ function applyLanguage() {
   document.querySelector(".footer-title").textContent = lang.footer.title;
   document.querySelector(".footer-text").textContent = lang.footer.text;
   document.querySelector(".footer-link-about").textContent = lang.footer.about;
+  document.querySelector(".footer-link-faq").textContent = lang.footer.faq;
   document.querySelector(".footer-link-privacy").textContent = lang.footer.privacy;
   document.querySelector(".footer-link-terms").textContent = lang.footer.terms;
   document.querySelector(".footer-link-contact").textContent = lang.footer.contact;
