@@ -117,10 +117,10 @@ const I18N = {
     footer: {
       title: "PBR 材质生成器",
       text: "单张图片生成 PBR 通道的在线工具。适合概念验证、快速 lookdev 和常见渲染器贴图整理。",
-      about: "关于 / About",
-      privacy: "隐私政策 / Privacy",
-      terms: "使用条款 / Terms",
-      contact: "联系 / Contact",
+      about: "关于",
+      privacy: "隐私政策",
+      terms: "使用条款",
+      contact: "联系",
     },
     mapDescriptions: {
       albedo: "压掉原图明暗影响，保留更干净的表面颜色。",
