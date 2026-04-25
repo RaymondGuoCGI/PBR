@@ -22,6 +22,15 @@ const downloadAllBtn = document.getElementById("download-all-btn");
 const statusText = document.getElementById("status-text");
 const sourceMeta = document.getElementById("source-meta");
 const resultsMeta = document.getElementById("results-meta");
+const feedbackTrigger = document.getElementById("feedback-trigger");
+const feedbackModal = document.getElementById("feedback-modal");
+const feedbackBackdrop = document.getElementById("feedback-backdrop");
+const feedbackClose = document.getElementById("feedback-close");
+const feedbackCancel = document.getElementById("feedback-cancel");
+const feedbackSubmit = document.getElementById("feedback-submit");
+const feedbackType = document.getElementById("feedback-type");
+const feedbackEmail = document.getElementById("feedback-email");
+const feedbackMessage = document.getElementById("feedback-message");
 
 const mapCanvases = {
   albedo: document.getElementById("albedo-canvas"),
@@ -79,6 +88,26 @@ const I18N = {
     exportTarget: "导出目标",
     downloadZip: "下载 ZIP",
     download: "下载",
+    feedback: {
+      trigger: "反馈",
+      title: "反馈与建议",
+      subtitle: "提交 Bug、功能建议或导出问题。系统会自动附带当前参数。",
+      typeLabel: "反馈类型",
+      emailLabel: "邮箱（可选）",
+      messageLabel: "问题描述",
+      messagePlaceholder: "请尽量描述你遇到的问题、期望的效果，或附上复现步骤。",
+      send: "发送反馈",
+      cancel: "取消",
+      close: "关闭",
+      types: {
+        bug: "Bug",
+        suggestion: "功能建议",
+        export: "导出问题",
+        other: "其他",
+      },
+      mailSubject: (type) => `PBR 材质生成器反馈 - ${type}`,
+      emptyError: "请先填写问题描述。",
+    },
     statuses: {
       idle: "等待上传图片。",
       loaded: "图片已加载，可以开始生成 PBR 贴图。",
@@ -160,6 +189,26 @@ const I18N = {
     exportTarget: "Export Target",
     downloadZip: "Download ZIP",
     download: "Download",
+    feedback: {
+      trigger: "Feedback",
+      title: "Feedback",
+      subtitle: "Send bugs, suggestions, or export issues. Current settings will be attached automatically.",
+      typeLabel: "Feedback Type",
+      emailLabel: "Email (Optional)",
+      messageLabel: "Message",
+      messagePlaceholder: "Describe the issue, expected result, or steps to reproduce.",
+      send: "Send Feedback",
+      cancel: "Cancel",
+      close: "Close",
+      types: {
+        bug: "Bug",
+        suggestion: "Suggestion",
+        export: "Export Issue",
+        other: "Other",
+      },
+      mailSubject: (type) => `PBR Material Generator Feedback - ${type}`,
+      emptyError: "Please enter a short description first.",
+    },
     statuses: {
       idle: "Waiting for an image upload.",
       loaded: "Image loaded. You can generate PBR maps now.",
@@ -304,6 +353,7 @@ applyExportProfile();
 bindThemeControl();
 bindLanguageControl();
 syncRangeVisuals();
+bindFeedbackControls();
 
 normalStrength.addEventListener("input", () => {
   normalStrengthValue.textContent = formatSignedRangeValue(normalStrength.value);
@@ -880,6 +930,20 @@ function bindThemeControl() {
   });
 }
 
+function bindFeedbackControls() {
+  feedbackTrigger.addEventListener("click", openFeedbackModal);
+  feedbackClose.addEventListener("click", closeFeedbackModal);
+  feedbackCancel.addEventListener("click", closeFeedbackModal);
+  feedbackBackdrop.addEventListener("click", closeFeedbackModal);
+  feedbackSubmit.addEventListener("click", submitFeedback);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !feedbackModal.hidden) {
+      closeFeedbackModal();
+    }
+  });
+}
+
 function bindLanguageControl() {
   languageSelect.addEventListener("change", () => {
     applyLanguage();
@@ -899,6 +963,7 @@ function updateDownloadTooltips() {
 
 function applyLanguage() {
   const lang = t();
+  const controlFieldLabels = document.querySelectorAll(".controls-panel .control-grid .field > span");
   document.documentElement.lang = currentLanguage() === "en" ? "en" : "zh-CN";
   document.title = lang.pageTitle;
   document.querySelector(".hero-copy h1").textContent = lang.heroTitle;
@@ -910,10 +975,10 @@ function applyLanguage() {
   document.querySelector(".controls-panel .panel-heading p").textContent = lang.controlsText;
   document.querySelector(".source-empty-state .upload-title").textContent = lang.uploadTitle;
   document.querySelector(".source-empty-state .upload-subtitle").textContent = lang.uploadText;
-  document.querySelectorAll(".field > span")[0].textContent = lang.resolution;
-  document.querySelectorAll(".field > span")[1].textContent = lang.materialType;
-  document.querySelectorAll(".field > span")[2].textContent = lang.normalStrength;
-  document.querySelectorAll(".field > span")[3].textContent = lang.detailStrength;
+  controlFieldLabels[0].textContent = lang.resolution;
+  controlFieldLabels[1].textContent = lang.materialType;
+  controlFieldLabels[2].textContent = lang.normalStrength;
+  controlFieldLabels[3].textContent = lang.detailStrength;
   generateBtn.textContent = lang.generate;
 
   document.querySelector(".source-panel .panel-heading h2").textContent = lang.sourceTitle;
@@ -949,6 +1014,19 @@ function applyLanguage() {
   document.querySelector(".footer-link-privacy").textContent = lang.footer.privacy;
   document.querySelector(".footer-link-terms").textContent = lang.footer.terms;
   document.querySelector(".footer-link-contact").textContent = lang.footer.contact;
+  feedbackTrigger.textContent = lang.feedback.trigger;
+  document.getElementById("feedback-title").textContent = lang.feedback.title;
+  document.getElementById("feedback-subtitle").textContent = lang.feedback.subtitle;
+  document.getElementById("feedback-type-label").textContent = lang.feedback.typeLabel;
+  document.getElementById("feedback-email-label").textContent = lang.feedback.emailLabel;
+  document.getElementById("feedback-message-label").textContent = lang.feedback.messageLabel;
+  feedbackMessage.placeholder = lang.feedback.messagePlaceholder;
+  feedbackCancel.textContent = lang.feedback.cancel;
+  feedbackSubmit.textContent = lang.feedback.send;
+  feedbackClose.setAttribute("aria-label", lang.feedback.close);
+  Array.from(feedbackType.options).forEach((option) => {
+    option.textContent = lang.feedback.types[option.value] || option.textContent;
+  });
 
   applyExportProfile();
 
@@ -1067,6 +1145,66 @@ function syncRangeVisuals() {
   [normalStrength, detailStrength].forEach(updateRangeTrack);
   normalStrengthValue.textContent = formatSignedRangeValue(normalStrength.value);
   detailStrengthValue.textContent = formatSignedRangeValue(detailStrength.value);
+}
+
+function openFeedbackModal() {
+  feedbackModal.hidden = false;
+  document.body.style.overflow = "hidden";
+  feedbackMessage.focus();
+}
+
+function closeFeedbackModal() {
+  feedbackModal.hidden = true;
+  document.body.style.overflow = "";
+}
+
+function getFeedbackTypeLabel() {
+  return feedbackType.options[feedbackType.selectedIndex]?.textContent || feedbackType.value;
+}
+
+function buildFeedbackContext() {
+  const exportTarget = exportProfileSelect.options[exportProfileSelect.selectedIndex]?.textContent || exportProfileSelect.value;
+  const material = materialSelect.options[materialSelect.selectedIndex]?.textContent || materialSelect.value;
+  const imageInfo = state.image ? `${state.imageName || "image"} (${state.image.width} x ${state.image.height})` : "not uploaded";
+
+  return [
+    `URL: ${window.location.href}`,
+    `Language: ${currentLanguage()}`,
+    `Theme: ${themeSelect.value}`,
+    `Source Image: ${imageInfo}`,
+    `Resolution: ${resolutionSelect.value}`,
+    `Export Target: ${exportTarget}`,
+    `Material Type: ${material}`,
+    `Normal Strength: ${normalStrength.value}`,
+    `Height Detail: ${detailStrength.value}`,
+    `Preserve Aspect: ${preserveAspectToggle.checked ? "yes" : "no"}`,
+    `Seamless: ${seamlessToggle.checked ? "yes" : "no"}`,
+  ].join("\n");
+}
+
+function submitFeedback() {
+  const message = feedbackMessage.value.trim();
+  if (!message) {
+    alert(t().feedback.emptyError);
+    feedbackMessage.focus();
+    return;
+  }
+
+  const typeLabel = getFeedbackTypeLabel();
+  const email = feedbackEmail.value.trim();
+  const bodyParts = [
+    message,
+    "",
+    email ? `Contact Email: ${email}` : "Contact Email: not provided",
+    "",
+    "Context",
+    buildFeedbackContext(),
+  ];
+
+  const subject = t().feedback.mailSubject(typeLabel);
+  const body = bodyParts.join("\n");
+  window.location.href = `mailto:raymondguo.cgi@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  closeFeedbackModal();
 }
 
 function makeSeamless(imageData) {

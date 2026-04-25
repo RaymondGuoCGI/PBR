@@ -264,6 +264,52 @@
       </footer>
     </div>
 
+    <button id="feedback-trigger" class="feedback-trigger" type="button">反馈</button>
+
+    <div id="feedback-modal" class="feedback-modal" hidden>
+      <div id="feedback-backdrop" class="feedback-backdrop"></div>
+      <div class="feedback-dialog panel" role="dialog" aria-modal="true" aria-labelledby="feedback-title">
+        <div class="feedback-header">
+          <div>
+            <h2 id="feedback-title">反馈与建议</h2>
+            <p id="feedback-subtitle">提交 Bug、功能建议或导出问题。系统会自动附带当前参数。</p>
+          </div>
+          <button id="feedback-close" class="feedback-close" type="button" aria-label="关闭">×</button>
+        </div>
+
+        <div class="feedback-form">
+          <label class="field">
+            <span id="feedback-type-label">反馈类型</span>
+            <select id="feedback-type">
+              <option value="bug">Bug</option>
+              <option value="suggestion">功能建议</option>
+              <option value="export">导出问题</option>
+              <option value="other">其他</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span id="feedback-email-label">邮箱（可选）</span>
+            <input id="feedback-email" class="text-input" type="email" placeholder="you@example.com" />
+          </label>
+
+          <label class="field">
+            <span id="feedback-message-label">问题描述</span>
+            <textarea
+              id="feedback-message"
+              class="feedback-textarea"
+              placeholder="请尽量描述你遇到的问题、期望的效果，或附上复现步骤。"
+            ></textarea>
+          </label>
+        </div>
+
+        <div class="feedback-actions">
+          <button id="feedback-cancel" class="secondary-btn" type="button">取消</button>
+          <button id="feedback-submit" class="primary-btn" type="button">发送反馈</button>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>
     <script src="./app.js" defer></script>
   </body>
