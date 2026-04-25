@@ -1,3 +1,3 @@
 window.__PBR_SITE_CONFIG__ = {
-  adsensePublisherId: "",
+  adsensePublisherId: "ca-pub-6468572273219976",
 };
