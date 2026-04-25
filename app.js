@@ -392,6 +392,7 @@ async function loadImageFile(file) {
     const image = await loadImage(imageUrl);
     state.image = image;
     state.imageName = file.name.replace(/\.[^/.]+$/, "");
+    uploadZone.classList.add("has-image");
     generateBtn.disabled = false;
     downloadAllBtn.disabled = true;
     downloadButtons.forEach((button) => {
@@ -895,8 +896,8 @@ function applyLanguage() {
 
   document.querySelector(".controls-panel .panel-heading h2").textContent = lang.controlsTitle;
   document.querySelector(".controls-panel .panel-heading p").textContent = lang.controlsText;
-  document.querySelector(".source-upload-zone .upload-title").textContent = lang.uploadTitle;
-  document.querySelector(".source-upload-zone .upload-subtitle").textContent = lang.uploadText;
+  document.querySelector(".source-empty-state .upload-title").textContent = lang.uploadTitle;
+  document.querySelector(".source-empty-state .upload-subtitle").textContent = lang.uploadText;
   document.querySelectorAll(".field > span")[0].textContent = lang.resolution;
   document.querySelectorAll(".field > span")[1].textContent = lang.materialType;
   document.querySelectorAll(".field > span")[2].textContent = lang.normalStrength;

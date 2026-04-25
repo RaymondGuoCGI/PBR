@@ -82,24 +82,25 @@
             <p>可选择保留原图比例，或先做基础无缝处理后再生成通道。</p>
           </div>
 
-          <label class="upload-zone source-upload-zone" for="file-input" id="upload-zone">
-            <input id="file-input" type="file" accept="image/*" />
-            <div class="upload-icon">
-              <span></span>
-              <span></span>
-            </div>
-            <span class="upload-title">拖拽图片到这里，或点击选择文件</span>
-            <span class="upload-subtitle">
-              推荐使用正面、光照相对均匀、尽量无强透视的材质照片
-            </span>
-          </label>
-
           <div class="source-preview">
-            <div class="source-header">
-              <h3>输入纹理</h3>
-              <span id="source-meta">尚未加载</span>
+            <div class="source-stage upload-zone" id="upload-zone">
+              <input id="file-input" type="file" accept="image/*" />
+              <div class="source-header">
+                <h3>输入纹理</h3>
+                <span id="source-meta">尚未加载</span>
+              </div>
+              <canvas id="source-canvas" width="1024" height="1024"></canvas>
+              <div class="source-empty-state">
+                <div class="upload-icon">
+                  <span></span>
+                  <span></span>
+                </div>
+                <span class="upload-title">拖拽图片到这里，或点击选择文件</span>
+                <span class="upload-subtitle">
+                  推荐使用正面、光照相对均匀、尽量无强透视的材质照片
+                </span>
+              </div>
             </div>
-            <canvas id="source-canvas" width="1024" height="1024"></canvas>
 
             <div class="source-options">
               <label class="toggle-option">

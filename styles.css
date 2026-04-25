@@ -272,10 +272,6 @@ h1 {
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
 
-.source-upload-zone {
-  margin-bottom: 14px;
-}
-
 .upload-zone:hover,
 .upload-zone.is-dragover {
   transform: translateY(-2px);
@@ -470,6 +466,52 @@ body[data-theme="light"] .map-card-header button:disabled {
   border: 1px solid var(--line);
 }
 
+.source-stage {
+  margin-bottom: 12px;
+  padding: 12px;
+  gap: 10px;
+}
+
+.source-stage .source-header {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.source-stage .upload-icon {
+  margin-bottom: 8px;
+}
+
+.source-empty-state {
+  position: absolute;
+  inset: 64px 18px 18px;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 8px;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(8, 21, 31, 0.16), rgba(8, 21, 31, 0.28));
+  pointer-events: none;
+}
+
+.source-stage.has-image .source-empty-state {
+  display: none;
+}
+
+.source-stage.has-image {
+  border-style: solid;
+  border-color: var(--line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02));
+}
+
+.source-stage.has-image:hover,
+.source-stage.has-image.is-dragover {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.025));
+  border-color: rgba(132, 255, 216, 0.35);
+}
+
 .source-header {
   display: flex;
   justify-content: space-between;
@@ -503,6 +545,10 @@ body[data-theme="light"] .map-card canvas {
     linear-gradient(180deg, rgba(224, 231, 236, 0.98), rgba(224, 231, 236, 0.98));
   background-size: 22px 22px;
   background-position: 0 0, 0 11px, 11px -11px, -11px 0;
+}
+
+body[data-theme="light"] .source-empty-state {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(224, 231, 236, 0.72));
 }
 
 .source-preview canvas {
