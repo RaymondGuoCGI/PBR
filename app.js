@@ -920,7 +920,7 @@ function applyLanguage() {
     updateResultsMeta(materialSelect.value, firstCanvas.width, firstCanvas.height);
   }
 
-  document.querySelector(".inline-field span").textContent = lang.exportTarget;
+  document.querySelector(".export-field > span").textContent = lang.exportTarget;
   downloadAllBtn.textContent = downloadAllBtn.textContent === I18N.en.statuses.zipPacking || downloadAllBtn.textContent === I18N.zh.statuses.zipPacking
     ? lang.statuses.zipPacking
     : lang.downloadZip;

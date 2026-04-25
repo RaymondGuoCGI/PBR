@@ -378,6 +378,19 @@ input[type="range"] {
   flex-wrap: wrap;
 }
 
+.dual-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.dual-actions .primary-btn,
+.dual-actions .results-download-btn {
+  width: 100%;
+  min-width: 0;
+}
+
 .primary-btn,
 .secondary-btn,
 .map-card-header button {
@@ -771,6 +784,10 @@ body[data-theme="light"] .icon-download-btn::after {
   justify-content: stretch;
   align-items: stretch;
   margin-top: 16px;
+}
+
+.export-field {
+  margin-top: 14px;
 }
 
 .inline-field {
