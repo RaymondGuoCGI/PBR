@@ -54,8 +54,7 @@ const I18N = {
     pageTitle: "PBR 材质生成器",
     heroTitle: "PBR 材质生成器",
     heroText: "上传一张参考图，快速生成常见 PBR 通道贴图。",
-    heroLabels: { language: "语言", theme: "主题", output: "输出", processing: "处理", size: "尺寸" },
-    heroValues: { output: "6 通道", processing: "本地生成", size: "512 - 4096" },
+    heroLabels: { language: "语言", theme: "主题" },
     controlsTitle: "生成设置",
     controlsText: "上传图片后，浏览器会直接在本地生成贴图。",
     uploadTitle: "拖拽图片到这里，或点击选择文件",
@@ -115,6 +114,14 @@ const I18N = {
       plastic: "塑料 / 橡胶",
       metal: "金属",
     },
+    footer: {
+      title: "PBR 材质生成器",
+      text: "单张图片生成 PBR 通道的在线工具。适合概念验证、快速 lookdev 和常见渲染器贴图整理。",
+      about: "关于 / About",
+      privacy: "隐私政策 / Privacy",
+      terms: "使用条款 / Terms",
+      contact: "联系 / Contact",
+    },
     mapDescriptions: {
       albedo: "压掉原图明暗影响，保留更干净的表面颜色。",
       height: "根据亮度与局部反差估算微表面起伏。",
@@ -128,8 +135,7 @@ const I18N = {
     pageTitle: "PBR Material Generator",
     heroTitle: "PBR Material Generator",
     heroText: "Upload one reference image and quickly generate common PBR texture channels.",
-    heroLabels: { language: "Language", theme: "Theme", output: "Output", processing: "Process", size: "Size" },
-    heroValues: { output: "6 channels", processing: "Local only", size: "512 - 4096" },
+    heroLabels: { language: "Language", theme: "Theme" },
     controlsTitle: "Generation Settings",
     controlsText: "After upload, the browser generates maps locally on your device.",
     uploadTitle: "Drop an image here, or click to choose a file",
@@ -188,6 +194,14 @@ const I18N = {
       fabric: "Fabric / Carpet",
       plastic: "Plastic / Rubber",
       metal: "Metal",
+    },
+    footer: {
+      title: "PBR Material Generator",
+      text: "A browser-based tool for generating PBR channels from a single image. Suitable for concept validation, quick lookdev, and renderer-ready texture prep.",
+      about: "About",
+      privacy: "Privacy",
+      terms: "Terms",
+      contact: "Contact",
     },
     mapDescriptions: {
       albedo: "Reduce lighting influence from the source and keep cleaner surface color.",
@@ -887,12 +901,6 @@ function applyLanguage() {
   document.querySelector(".hero-text").textContent = lang.heroText;
   document.querySelector(".hero-select span").textContent = lang.heroLabels.language;
   document.querySelectorAll(".hero-select span")[1].textContent = lang.heroLabels.theme;
-  document.querySelectorAll(".stat-card span")[0].textContent = lang.heroLabels.output;
-  document.querySelectorAll(".stat-card span")[1].textContent = lang.heroLabels.processing;
-  document.querySelectorAll(".stat-card span")[2].textContent = lang.heroLabels.size;
-  document.querySelectorAll(".stat-card strong")[0].textContent = lang.heroValues.output;
-  document.querySelectorAll(".stat-card strong")[1].textContent = lang.heroValues.processing;
-  document.querySelectorAll(".stat-card strong")[2].textContent = lang.heroValues.size;
 
   document.querySelector(".controls-panel .panel-heading h2").textContent = lang.controlsTitle;
   document.querySelector(".controls-panel .panel-heading p").textContent = lang.controlsText;
@@ -931,6 +939,12 @@ function applyLanguage() {
   });
   themeSelect.options[0].textContent = lang.themes.dark;
   themeSelect.options[1].textContent = lang.themes.light;
+  document.querySelector(".footer-title").textContent = lang.footer.title;
+  document.querySelector(".footer-text").textContent = lang.footer.text;
+  document.querySelector(".footer-link-about").textContent = lang.footer.about;
+  document.querySelector(".footer-link-privacy").textContent = lang.footer.privacy;
+  document.querySelector(".footer-link-terms").textContent = lang.footer.terms;
+  document.querySelector(".footer-link-contact").textContent = lang.footer.contact;
 
   applyExportProfile();
 

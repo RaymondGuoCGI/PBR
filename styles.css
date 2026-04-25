@@ -148,6 +148,7 @@ input {
   display: flex;
   gap: 10px;
   align-items: center;
+  margin-left: auto;
 }
 
 .hero-select {
@@ -194,36 +195,6 @@ h1 {
   color: var(--muted);
   line-height: 1.45;
   font-size: 0.9rem;
-}
-
-.glass-card {
-  border-radius: 22px;
-  padding: 12px 14px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03)),
-    linear-gradient(120deg, rgba(132, 255, 216, 0.05), rgba(255, 201, 129, 0.03));
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.hero-stats {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  min-width: 420px;
-}
-
-.stat-card span {
-  display: block;
-  margin-bottom: 4px;
-  color: var(--muted);
-  font-size: 0.74rem;
-}
-
-.stat-card strong {
-  font-size: 0.9rem;
-  line-height: 1.2;
 }
 
 .workspace {
@@ -946,12 +917,6 @@ body[data-theme="light"] .icon-download-btn::after {
     order: 2;
     justify-content: flex-start;
     flex-wrap: wrap;
-  }
-
-  .hero-stats {
-    grid-template-columns: 1fr;
-    min-width: 0;
-    order: 3;
   }
 
   .map-grid {
