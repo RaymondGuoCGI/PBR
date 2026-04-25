@@ -206,12 +206,12 @@ const EXPORT_PROFILES = {
     zipSuffix: "generic",
     activeMaps: ["albedo", "height", "normal", "roughness", "ao", "metallic"],
     maps: {
-      albedo: { title: { zh: "基础颜色", en: "Base Color" }, fileSuffix: "BaseColor" },
-      height: { title: { zh: "高度", en: "Height" }, fileSuffix: "Height" },
-      normal: { title: { zh: "法线", en: "Normal" }, fileSuffix: "Normal" },
-      roughness: { title: { zh: "粗糙度", en: "Roughness" }, fileSuffix: "Roughness" },
-      ao: { title: { zh: "环境遮蔽", en: "Ambient Occlusion" }, fileSuffix: "AO" },
-      metallic: { title: { zh: "金属度", en: "Metallic" }, fileSuffix: "Metallic" },
+      albedo: { title: { zh: "基础颜色", en: "Base Color" }, fileSuffix: "BaseColor", sourceKey: "albedo" },
+      height: { title: { zh: "高度", en: "Height" }, fileSuffix: "Height", sourceKey: "height" },
+      normal: { title: { zh: "法线", en: "Normal" }, fileSuffix: "Normal", sourceKey: "normal" },
+      roughness: { title: { zh: "粗糙度", en: "Roughness" }, fileSuffix: "Roughness", sourceKey: "roughness" },
+      ao: { title: { zh: "环境遮蔽", en: "Ambient Occlusion" }, fileSuffix: "AO", sourceKey: "ao" },
+      metallic: { title: { zh: "金属度", en: "Metallic" }, fileSuffix: "Metallic", sourceKey: "metallic" },
     },
   },
   blender: {
@@ -219,12 +219,12 @@ const EXPORT_PROFILES = {
     zipSuffix: "blender",
     activeMaps: ["albedo", "height", "normal", "roughness", "metallic"],
     maps: {
-      albedo: { title: { zh: "基础颜色", en: "Base Color" }, fileSuffix: "BaseColor" },
-      height: { title: { zh: "置换", en: "Displacement" }, fileSuffix: "Displacement" },
-      normal: { title: { zh: "法线", en: "Normal" }, fileSuffix: "Normal" },
-      roughness: { title: { zh: "粗糙度", en: "Roughness" }, fileSuffix: "Roughness" },
-      ao: { title: { zh: "环境遮蔽", en: "Ambient Occlusion" }, fileSuffix: "AO" },
-      metallic: { title: { zh: "金属度", en: "Metallic" }, fileSuffix: "Metallic" },
+      albedo: { title: { zh: "基础颜色", en: "Base Color" }, fileSuffix: "BaseColor", sourceKey: "albedo" },
+      height: { title: { zh: "置换", en: "Displacement" }, fileSuffix: "Displacement", sourceKey: "height" },
+      normal: { title: { zh: "法线", en: "Normal" }, fileSuffix: "Normal", sourceKey: "normal" },
+      roughness: { title: { zh: "粗糙度", en: "Roughness" }, fileSuffix: "Roughness", sourceKey: "roughness" },
+      ao: { title: { zh: "环境遮蔽", en: "Ambient Occlusion" }, fileSuffix: "AO", sourceKey: "ao" },
+      metallic: { title: { zh: "金属度", en: "Metallic" }, fileSuffix: "Metallic", sourceKey: "metallic" },
     },
   },
   unreal: {
@@ -232,38 +232,54 @@ const EXPORT_PROFILES = {
     zipSuffix: "ue",
     activeMaps: ["albedo", "normal", "roughness", "ao", "metallic"],
     maps: {
-      albedo: { title: { zh: "基础颜色", en: "Base Color" }, fileSuffix: "BaseColor" },
-      height: { title: { zh: "高度", en: "Height" }, fileSuffix: "Height" },
-      normal: { title: { zh: "法线", en: "Normal" }, fileSuffix: "Normal" },
-      roughness: { title: { zh: "粗糙度", en: "Roughness" }, fileSuffix: "Roughness" },
-      ao: { title: { zh: "环境遮蔽", en: "Ambient Occlusion" }, fileSuffix: "AmbientOcclusion" },
-      metallic: { title: { zh: "金属度", en: "Metallic" }, fileSuffix: "Metallic" },
+      albedo: { title: { zh: "基础颜色", en: "Base Color" }, fileSuffix: "BaseColor", sourceKey: "albedo" },
+      height: { title: { zh: "高度", en: "Height" }, fileSuffix: "Height", sourceKey: "height" },
+      normal: { title: { zh: "法线", en: "Normal" }, fileSuffix: "Normal", sourceKey: "normal" },
+      roughness: { title: { zh: "粗糙度", en: "Roughness" }, fileSuffix: "Roughness", sourceKey: "roughness" },
+      ao: { title: { zh: "环境遮蔽", en: "Ambient Occlusion" }, fileSuffix: "AmbientOcclusion", sourceKey: "ao" },
+      metallic: { title: { zh: "金属度", en: "Metallic" }, fileSuffix: "Metallic", sourceKey: "metallic" },
     },
   },
   vray: {
     label: { zh: "V-Ray", en: "V-Ray" },
     zipSuffix: "vray",
-    activeMaps: ["albedo", "height", "normal", "roughness"],
+    activeMaps: ["albedo", "normal", "roughness", "metallic", "height"],
     maps: {
-      albedo: { title: { zh: "漫反射", en: "Diffuse" }, fileSuffix: "Diffuse" },
-      height: { title: { zh: "置换", en: "Displacement" }, fileSuffix: "Displacement" },
-      normal: { title: { zh: "法线", en: "Normal" }, fileSuffix: "Normal" },
-      roughness: { title: { zh: "反射粗糙度", en: "Reflection Roughness" }, fileSuffix: "ReflectionRoughness" },
-      ao: { title: { zh: "环境遮蔽", en: "Ambient Occlusion" }, fileSuffix: "AO" },
-      metallic: { title: { zh: "金属度", en: "Metalness" }, fileSuffix: "Metalness" },
+      albedo: { title: { zh: "漫反射", en: "Diffuse" }, fileSuffix: "Diffuse", sourceKey: "albedo" },
+      height: { title: { zh: "置换", en: "Displacement" }, fileSuffix: "Displacement", sourceKey: "height" },
+      normal: { title: { zh: "凹凸 / 法线", en: "Bump / Normal" }, fileSuffix: "Normal", sourceKey: "normal" },
+      roughness: { title: { zh: "反射粗糙度", en: "Reflection Roughness" }, fileSuffix: "ReflectionRoughness", sourceKey: "roughness" },
+      ao: { title: { zh: "环境遮蔽", en: "Ambient Occlusion" }, fileSuffix: "AO", sourceKey: "ao" },
+      metallic: {
+        title: { zh: "反射颜色", en: "Reflection Color" },
+        fileSuffix: "Reflection",
+        sourceKey: "specular",
+        description: {
+          zh: "基于基础颜色、金属度与粗糙度估算的反射颜色，适合 V-Ray 常见反射工作流。",
+          en: "Estimated reflection color derived from base color, metalness, and roughness for common V-Ray workflows.",
+        },
+      },
     },
   },
   keyshot: {
     label: { zh: "KeyShot", en: "KeyShot" },
     zipSuffix: "keyshot",
-    activeMaps: ["albedo", "height", "normal", "roughness"],
+    activeMaps: ["albedo", "normal", "roughness", "metallic"],
     maps: {
-      albedo: { title: { zh: "基础颜色", en: "Base Color" }, fileSuffix: "BaseColor" },
-      height: { title: { zh: "置换", en: "Displacement" }, fileSuffix: "Displacement" },
-      normal: { title: { zh: "法线 / 凹凸", en: "Normal / Bump" }, fileSuffix: "Normal" },
-      roughness: { title: { zh: "粗糙度", en: "Roughness" }, fileSuffix: "Roughness" },
-      ao: { title: { zh: "遮蔽", en: "Occlusion" }, fileSuffix: "Occlusion" },
-      metallic: { title: { zh: "金属度", en: "Metallic" }, fileSuffix: "Metallic" },
+      albedo: { title: { zh: "基础颜色", en: "Base Color" }, fileSuffix: "BaseColor", sourceKey: "albedo" },
+      height: { title: { zh: "置换", en: "Displacement" }, fileSuffix: "Displacement", sourceKey: "height" },
+      normal: { title: { zh: "凹凸 / 法线", en: "Bump / Normal" }, fileSuffix: "Bump", sourceKey: "normal" },
+      roughness: { title: { zh: "粗糙度", en: "Roughness" }, fileSuffix: "Roughness", sourceKey: "roughness" },
+      ao: { title: { zh: "透明度", en: "Opacity" }, fileSuffix: "Opacity", sourceKey: "opacity" },
+      metallic: {
+        title: { zh: "镜面 / 反射颜色", en: "Specular / Reflection Color" },
+        fileSuffix: "SpecularColor",
+        sourceKey: "specular",
+        description: {
+          zh: "基于基础颜色、金属度与粗糙度估算的镜面反射颜色，更贴近 KeyShot 常见材质节点用法。",
+          en: "Estimated specular color derived from base color, metalness, and roughness for common KeyShot material setups.",
+        },
+      },
     },
   },
 };
@@ -350,7 +366,7 @@ generateBtn.addEventListener("click", async () => {
   const mapSet = buildPbrMaps(baseData, profile, normalScale, detailScale);
 
   state.maps = mapSet;
-  renderMaps(mapSet);
+  renderMaps();
   updateResultsMeta(profile, baseData.width, baseData.height);
   enableDownloads();
 
@@ -489,6 +505,8 @@ function buildPbrMaps(imageData, profile, normalScale, detailScale) {
   const ao = new Float32Array(pixelCount);
   const metallic = new Float32Array(pixelCount);
   const albedoData = new Uint8ClampedArray(pixelCount * 4);
+  const specularData = new Uint8ClampedArray(pixelCount * 4);
+  const opacityData = new Uint8ClampedArray(pixelCount * 4);
 
   const meanLum = averageOf(luminance);
   const meanSat = averageOf(saturation);
@@ -515,6 +533,24 @@ function buildPbrMaps(imageData, profile, normalScale, detailScale) {
     albedoData[offset + 1] = shaded[1];
     albedoData[offset + 2] = shaded[2];
     albedoData[offset + 3] = 255;
+
+    const metalness = metallic[i];
+    const dielectricSpec = clamp01(0.16 + (1 - roughness[i]) * 0.1);
+    const specularR = mix(dielectricSpec, shaded[0] / 255, metalness);
+    const specularG = mix(dielectricSpec, shaded[1] / 255, metalness);
+    const specularB = mix(dielectricSpec, shaded[2] / 255, metalness);
+
+    specularData[offset] = Math.round(specularR * 255);
+    specularData[offset + 1] = Math.round(specularG * 255);
+    specularData[offset + 2] = Math.round(specularB * 255);
+    specularData[offset + 3] = 255;
+
+    const opacity = data[offset + 3] / 255;
+    const opacityValue = Math.round(opacity * 255);
+    opacityData[offset] = opacityValue;
+    opacityData[offset + 1] = opacityValue;
+    opacityData[offset + 2] = opacityValue;
+    opacityData[offset + 3] = 255;
   }
 
   const normal = buildNormalMap(heightMap, width, height, normalScale);
@@ -526,6 +562,8 @@ function buildPbrMaps(imageData, profile, normalScale, detailScale) {
     roughness: grayscaleToImageData(roughness, width, height),
     ao: grayscaleToImageData(ao, width, height),
     metallic: grayscaleToImageData(metallic, width, height),
+    specular: new ImageData(specularData, width, height),
+    opacity: new ImageData(opacityData, width, height),
   };
 }
 
@@ -620,9 +658,19 @@ function boxBlur(values, width, height, radius) {
   return output;
 }
 
-function renderMaps(mapSet) {
-  Object.entries(mapSet).forEach(([key, imageData]) => {
-    const canvas = mapCanvases[key];
+function renderMaps() {
+  const exportProfile = getExportProfile();
+
+  Object.entries(mapCanvases).forEach(([slotKey, canvas]) => {
+    const sourceKey = getMapSourceKey(slotKey, exportProfile);
+    const imageData = state.maps[sourceKey];
+
+    if (!imageData) {
+      const ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+
     setCanvasSize(canvas, imageData.width, imageData.height);
     const ctx = canvas.getContext("2d");
     ctx.putImageData(imageData, 0, 0);
@@ -640,7 +688,7 @@ function enableDownloads() {
   downloadAllBtn.disabled = false;
   downloadButtons.forEach((button) => {
     const key = button.dataset.download;
-    button.disabled = !getExportProfile().activeMaps.includes(key);
+    button.disabled = !getExportProfile().activeMaps.includes(key) || !state.maps[getMapSourceKey(key)];
   });
 }
 
@@ -769,12 +817,21 @@ function applyExportProfile() {
 
   downloadButtons.forEach((button) => {
     const key = button.dataset.download;
-    button.disabled = !state.maps[key] || !exportProfile.activeMaps.includes(key);
+    button.disabled = !state.maps[getMapSourceKey(key, exportProfile)] || !exportProfile.activeMaps.includes(key);
   });
+
+  updateMapDescriptions();
+  if (Object.keys(state.maps).length > 0) {
+    renderMaps();
+  }
 }
 
 function getExportProfile() {
   return EXPORT_PROFILES[exportProfileSelect.value] || EXPORT_PROFILES.generic;
+}
+
+function getMapSourceKey(slotKey, exportProfile = getExportProfile()) {
+  return exportProfile.maps[slotKey]?.sourceKey || slotKey;
 }
 
 function bindThemeControl() {
@@ -859,12 +916,6 @@ function applyLanguage() {
   themeSelect.options[1].textContent = lang.themes.light;
 
   applyExportProfile();
-  Object.keys(lang.mapDescriptions).forEach((key) => {
-    const element = mapDescriptionsForKey(key);
-    if (element) {
-      element.textContent = lang.mapDescriptions[key];
-    }
-  });
 
   if (statusText.dataset.statusKey) {
     setStatus(statusText.dataset.statusKey);
@@ -884,6 +935,27 @@ function setOptionText(selectElement, mapping) {
 function mapDescriptionsForKey(key) {
   const order = ["albedo", "height", "normal", "roughness", "ao", "metallic"];
   return mapDescElements[order.indexOf(key)];
+}
+
+function updateMapDescriptions() {
+  const exportProfile = getExportProfile();
+  const lang = currentLanguage();
+
+  Object.keys(mapTitleElements).forEach((slotKey) => {
+    const element = mapDescriptionsForKey(slotKey);
+    if (!element) {
+      return;
+    }
+
+    const profileMap = exportProfile.maps[slotKey];
+    if (profileMap.description?.[lang]) {
+      element.textContent = profileMap.description[lang];
+      return;
+    }
+
+    const sourceKey = getMapSourceKey(slotKey, exportProfile);
+    element.textContent = t().mapDescriptions[sourceKey] || t().mapDescriptions[slotKey] || "";
+  });
 }
 
 function currentLanguage() {
@@ -977,4 +1049,8 @@ function clamp(value, min, max) {
 
 function clamp01(value) {
   return clamp(value, 0, 1);
+}
+
+function mix(a, b, t) {
+  return a * (1 - t) + b * t;
 }
