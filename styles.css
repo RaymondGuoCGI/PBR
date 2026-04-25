@@ -457,27 +457,27 @@ button:disabled {
 .map-card canvas {
   width: 100%;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   background:
-    linear-gradient(45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%),
-    linear-gradient(180deg, rgba(8, 21, 31, 0.92), rgba(8, 21, 31, 0.92));
-  background-size: 22px 22px;
-  background-position: 0 0, 0 11px, 11px -11px, -11px 0;
+    repeating-conic-gradient(
+      from 45deg,
+      rgba(255, 255, 255, 0.12) 0deg 90deg,
+      rgba(0, 0, 0, 0.18) 90deg 180deg
+    )
+    50% / 22px 22px,
+    linear-gradient(180deg, rgba(28, 33, 38, 0.96), rgba(28, 33, 38, 0.96));
 }
 
 body[data-theme="light"] .source-preview canvas,
 body[data-theme="light"] .map-card canvas {
   background:
-    linear-gradient(45deg, rgba(17, 35, 49, 0.06) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(17, 35, 49, 0.06) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(17, 35, 49, 0.06) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(17, 35, 49, 0.06) 75%),
-    linear-gradient(180deg, rgba(222, 232, 237, 0.96), rgba(222, 232, 237, 0.96));
-  background-size: 22px 22px;
-  background-position: 0 0, 0 11px, 11px -11px, -11px 0;
+    repeating-conic-gradient(
+      from 45deg,
+      rgba(255, 255, 255, 0.3) 0deg 90deg,
+      rgba(0, 0, 0, 0.14) 90deg 180deg
+    )
+    50% / 22px 22px,
+    linear-gradient(180deg, rgba(205, 210, 214, 0.98), rgba(205, 210, 214, 0.98));
 }
 
 .source-preview canvas {
