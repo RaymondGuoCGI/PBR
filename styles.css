@@ -400,7 +400,8 @@ body[data-theme="light"] .field,
 body[data-theme="light"] .tip-item,
 body[data-theme="light"] .toggle-option,
 body[data-theme="light"] .source-preview,
-body[data-theme="light"] .map-card {
+body[data-theme="light"] .map-card,
+body[data-theme="light"] .source-stage {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 
@@ -533,6 +534,44 @@ body[data-theme="light"] .map-card canvas {
 
 body[data-theme="light"] .source-empty-state {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(224, 231, 236, 0.72));
+}
+
+body[data-theme="light"] .source-stage {
+  border-color: rgba(17, 35, 49, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(243, 247, 249, 0.92));
+}
+
+body[data-theme="light"] .source-stage:hover,
+body[data-theme="light"] .source-stage.is-dragover {
+  border-color: rgba(24, 205, 160, 0.42);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(236, 245, 247, 0.96));
+}
+
+body[data-theme="light"] input[type="range"] {
+  accent-color: #18cda0;
+}
+
+body[data-theme="light"] input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(17, 35, 49, 0.18);
+}
+
+body[data-theme="light"] input[type="range"]::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(17, 35, 49, 0.18);
+}
+
+body[data-theme="light"] input[type="range"]::-webkit-slider-thumb {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9);
+}
+
+body[data-theme="light"] .upload-icon {
+  background: linear-gradient(180deg, rgba(24, 205, 160, 0.18), rgba(17, 35, 49, 0.04));
+  border: 1px solid rgba(17, 35, 49, 0.08);
 }
 
 .source-preview canvas {
