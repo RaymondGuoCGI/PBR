@@ -465,6 +465,7 @@ function refreshSourcePreview() {
     seamless: seamlessToggle.checked,
     canvas: sourceCanvas,
   });
+  syncOutputPlaceholderSize();
   return imageData;
 }
 
@@ -472,6 +473,23 @@ function clearMapCanvases() {
   Object.values(mapCanvases).forEach((canvas) => {
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+  });
+}
+
+function syncOutputPlaceholderSize() {
+  if (!state.image) {
+    return;
+  }
+
+  const resolution = Number(resolutionSelect.value);
+  const { width, height } = getOutputDimensions(
+    state.image,
+    resolution,
+    preserveAspectToggle.checked
+  );
+
+  Object.values(mapCanvases).forEach((canvas) => {
+    setCanvasSize(canvas, width, height);
   });
 }
 
@@ -779,10 +797,12 @@ function bindResolutionControls() {
 
 function markOutputsStale(message) {
   if (!state.image || Object.keys(state.maps).length === 0) {
+    syncOutputPlaceholderSize();
     return;
   }
 
   clearMapCanvases();
+  syncOutputPlaceholderSize();
   state.maps = {};
   downloadAllBtn.disabled = true;
   downloadButtons.forEach((button) => {
